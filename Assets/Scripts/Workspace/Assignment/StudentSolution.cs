@@ -67,22 +67,78 @@ namespace Assignment
 
         public int[] AS01_SelectionSortDescending(int[] numbers)
         {
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                int maxIndex = i;
+                for (int j = i + 1; j < numbers.Length; j++)
+                {
+                    if (numbers[j] > numbers[maxIndex])
+                    {
+                        maxIndex = j;
+                    }
+                }
+                (numbers[i], numbers[maxIndex]) = (numbers[maxIndex], numbers[i]);
+            }
             return numbers;
         }
 
         public int[] AS02_BubbleSortDescending(int[] numbers)
         {
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                for (int j = 0; j < numbers.Length - i - 1; j++)
+                {
+                    if (numbers[j] < numbers[j + 1])
+                    {
+                        (numbers[j], numbers[j + 1]) = (numbers[j + 1], numbers[j]);
+                    }
+                }
+            }
             return numbers;
         }
 
         public int[] AS03_InsertionSortDescending(int[] numbers)
         {
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                int key = numbers[i];
+                int j = i - 1;
+                while (j >= 0 && numbers[j] < key)
+                {
+                    numbers[j + 1] = numbers[j];
+                    j--;
+                }
+                numbers[j + 1] = key;
+            }
             return numbers;
         }
 
         public int AS04_FindTheSecondLargestNumber(int[] numbers)
         {
-            return 0;
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                int maxIndex = i;
+                for (int j = i + 1; j < numbers.Length; j++)
+                {
+                    if (numbers[j] > numbers[maxIndex])
+                    {
+                        maxIndex = j;
+                    }
+                }
+                (numbers[i], numbers[maxIndex]) = (numbers[maxIndex], numbers[i]);
+            }
+
+            int secondLargeNumIndex = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] < numbers[0])
+                {
+                    secondLargeNumIndex = i;
+                    break;
+                }
+            }
+
+            return numbers[secondLargeNumIndex];
         }
 
         #endregion
@@ -91,7 +147,36 @@ namespace Assignment
 
         public int EX01_FindLongestConsecutiveSequence(int[] numbers)
         {
-            return 0;
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                int maxIndex = i;
+                for (int j = i + 1; j < numbers.Length; j++)
+                {
+                    if (numbers[j] > numbers[maxIndex])
+                    {
+                        maxIndex = j;
+                    }
+                }
+                (numbers[i], numbers[maxIndex]) = (numbers[maxIndex], numbers[i]);
+            }
+
+            int currentConSeq = 1;
+            int longestConSeq = 1;
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                switch (numbers[i] - numbers[i + 1])
+                {
+                    case 0: continue;
+                    case 1: currentConSeq++; break;
+                    default: currentConSeq = 1; break;
+                }
+
+                if (currentConSeq > longestConSeq)
+                {
+                    longestConSeq = currentConSeq;
+                }
+            }
+            return longestConSeq;
         }
 
         #endregion
